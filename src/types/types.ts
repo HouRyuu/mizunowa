@@ -1,3 +1,6 @@
+/**
+ * カレンダー用状態
+ */
 export type RecordStatus = 'normal' | 'abnormal' | 'active';
 
 /**
@@ -5,6 +8,9 @@ export type RecordStatus = 'normal' | 'abnormal' | 'active';
  */
 export type DialysisStatus = -1 | 0 | 1 | 2 | 3 | 4;
 
+/**
+ * 透析状態タイプ
+ */
 export type DiaStatus = {
     // -1予約済
     reserved: DialysisStatus,
@@ -19,7 +25,9 @@ export type DiaStatus = {
     // 4後体重測定済
     weighedAfter: DialysisStatus
 }
-
+/**
+ * 透析情報
+ */
 export type DialysisInfo = {
     // 時間・スケジュール（Date型で扱いやすく）
     // 予約時間

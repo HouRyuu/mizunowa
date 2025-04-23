@@ -23,7 +23,10 @@ const tabItems = [
         icon: <span className="material-symbols-outlined">brunch_dining</span>,
     },
 ];
-
+/**
+ * 情報タブコンテナ
+ * @constructor
+ */
 export default function InfoTabs() {
     const swiperRef = useRef<SwiperRef>(null)
     const [activeIndex, setActiveIndex] = useState(0)

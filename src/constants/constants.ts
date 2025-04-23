@@ -4,13 +4,17 @@ export const timeFormats = {
     date: 'YYYYMMDD',
     datetime: 'YYYY/MM/DD HH:mm',
 };
-
+/**
+ * カレンダー用状態と対応するタグの色
+ */
 export const statusColorMap: Map<RecordStatus, string> = new Map([
     ['normal', 'success'],
     ['abnormal', 'warning'],
     ['active', 'primary'],
 ]);
-
+/**
+ * 透析状態
+ */
 export const diaStatus: DiaStatus = {
     reserved: -1,          // 予約済
     checkedIn: 0,          // 受付完了

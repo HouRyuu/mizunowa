@@ -3,20 +3,7 @@ import {Step} from "antd-mobile/es/components/steps/step";
 import {mockDialysisInfo} from "@/mock/mockData";
 import dayjs from "dayjs";
 import {diaStatus, timeFormats} from "@/constants/constants";
-
-/**
- * 実透析時間を計算する
- * @param startedAt 透析開始時点
- * @param endsAt 透析終了時点
- */
-const calcDialysisTime = (startedAt: Date = new Date(), endsAt: Date = new Date()): string => {
-    return getTimeView(dayjs(endsAt).diff(startedAt, 'minutes'));
-}
-
-const getTimeView = (minutes: number): string => {
-    const hours = Math.floor(minutes / 60);
-    return `${hours > 0 ? `${hours}時間` : ''}${minutes % 60 > 0 ? `${minutes % 60}分` : ''}`;
-}
+import {getTimeView} from "@/utils/timeUtil";
 
 export default function DialysisTabPanel() {
     return (<Steps direction="vertical"
@@ -75,7 +62,7 @@ export default function DialysisTabPanel() {
                                 :
                                 <>
                                     <li>{mockDialysisInfo.room}内の{mockDialysisInfo.bed}ベッド</li>
-                                    <li>経過時間：{calcDialysisTime(mockDialysisInfo.startedAt, mockDialysisInfo.endsAt)}</li>
+                                    <li>経過時間：{getTimeView(dayjs(mockDialysisInfo.startedAt).diff(mockDialysisInfo.endsAt, 'minutes'))}</li>
                                 </>
                         }
                     </ul>

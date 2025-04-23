@@ -3,6 +3,10 @@ import {recordStatusMap} from "@/mock/mockData";
 import dayjs from "dayjs";
 import {timeFormats, statusColorMap} from "@/constants/constants";
 
+/**
+ * 透析カレンダー
+ * @constructor
+ */
 export default function DialysisCalendar() {
     return (
         <>
@@ -13,8 +17,7 @@ export default function DialysisCalendar() {
                 max={new Date('2025-12-31')}
                 renderLabel={date => {
                     const recordStatus = recordStatusMap.get(dayjs(date).format(timeFormats.date));
-                    return recordStatus ? <Tag round
-                                               color={statusColorMap.get(recordStatus)}/> : <></>;
+                    return recordStatus ? <Tag round color={statusColorMap.get(recordStatus)}/> : <></>;
                 }}
             />
         </>
