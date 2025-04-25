@@ -25,6 +25,7 @@ export type DiaStatus = {
     // 4後体重測定済
     weighedAfter: DialysisStatus
 }
+
 /**
  * 透析情報
  */

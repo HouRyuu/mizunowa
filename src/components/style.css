@@ -4,3 +4,10 @@
 /*        overflow-y: auto;*/
 /*    }*/
 /*}*/
+.dialysis-tab {
+    .adm-error-block-image {
+        svg {
+            margin: auto;
+        }
+    }
+}

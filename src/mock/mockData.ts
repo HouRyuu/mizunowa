@@ -7,14 +7,14 @@ export const recordStatusMap: Map<string, RecordStatus> = new Map([
     ['20250410', 'active'],
 ]);
 
-export const mockDialysisInfo: DialysisInfo = {
+export const mockDialysisInfo: DialysisInfo | null = {
     reservedAt: new Date('2025-04-18T08:30:00'),
     arrivedAt: new Date('2025-04-18T08:25:00'),
     startedAt: new Date('2025-04-18T08:45:00'),
-    // endsAt: new Date('2025-04-18T12:45:00'),
+    endsAt: new Date('2025-04-18T12:45:00'),
     remainingMin: 240,
 
-    status: diaStatus.dialyzing,
+    status: diaStatus.weighedAfter,
 
     reception: '中央受付',
     room: '第2透析室',
@@ -27,7 +27,7 @@ export const mockDialysisInfo: DialysisInfo = {
 
     weightBefore: 71.2,
     dryWeight: 69.0,
-    weightAfter: undefined,
+    weightAfter: 69.1,
     ufTarget: 2.2,
     ufActual: 1.4,
-};
+}/* null*/;

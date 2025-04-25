@@ -44,7 +44,7 @@ export default function InfoTabs() {
                     setActiveIndex(index)
                 }}
             >
-                <Swiper.Item className="overflow-y-auto">
+                <Swiper.Item className="overflow-y-auto dialysis-tab">
                     <DialysisTabPanel/>
                 </Swiper.Item>
                 <Swiper.Item className="overflow-y-auto">
