@@ -1,23 +1,33 @@
 import {Calendar, Tag} from "antd-mobile";
-import {recordStatusMap} from "@/mock/mockData";
 import dayjs from "dayjs";
 import {timeFormats, statusColorMap} from "@/constants/constants";
+import {DialysisDateRange, DiaRec} from "@/types/types";
+
+interface Props {
+    diaDateRange: DialysisDateRange;
+    diaRecordStatusMap: Map<string, DiaRec>;
+    changeDiaDate: Function;
+}
 
 /**
  * 透析カレンダー
  * @constructor
  */
-export default function DialysisCalendar() {
+export default function DialysisCalendar({diaDateRange, diaRecordStatusMap, changeDiaDate}: Props) {
+    const curDate = dayjs(new Date()).format(timeFormats.compactDate);
     return (
         <>
             <Calendar
                 className={'border-b border-gray-200'}
                 selectionMode='single'
-                min={new Date('2021-01-01')}
-                max={new Date('2025-12-31')}
+                min={diaDateRange.minDate}
+                max={diaDateRange.maxDate}
+                defaultValue={new Date()}
+                onChange={date => changeDiaDate(date)}
                 renderLabel={date => {
-                    const recordStatus = recordStatusMap.get(dayjs(date).format(timeFormats.date));
-                    return recordStatus ? <Tag round color={statusColorMap.get(recordStatus)}/> : <></>;
+                    const compactDate = dayjs(date).format(timeFormats.compactDate);
+                    const recordStatus = diaRecordStatusMap.get(compactDate)?.status;
+                    return recordStatus ? <Tag round color={compactDate === curDate ? 'warning' : statusColorMap.get(recordStatus)}/> : <></>;
                 }}
             />
         </>

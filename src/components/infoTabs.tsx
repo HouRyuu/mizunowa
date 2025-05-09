@@ -1,3 +1,5 @@
+'use client';
+
 import {SwiperRef} from "antd-mobile/es/components/swiper/swiper";
 import DialysisTabPanel from "@/components/dialysis/dialysisTabPanel";
 import DrugTabPanel from "@/components/drug/drugTabPanel";
@@ -5,6 +7,7 @@ import DietTabPanel from "@/components/diet/dietTabPanel";
 import {Swiper, TabBar} from "antd-mobile";
 import {useRef, useState} from "react";
 import "./style.css";
+import {DialysisInfo} from "@/types/types";
 
 const tabItems = [
     {
@@ -23,11 +26,16 @@ const tabItems = [
         icon: <span className="material-symbols-outlined">brunch_dining</span>,
     },
 ];
+
+interface Props {
+    diaInfo?: DialysisInfo
+}
+
 /**
  * 情報タブコンテナ
  * @constructor
  */
-export default function InfoTabs() {
+export default function InfoTabs({diaInfo}: Props) {
     const swiperRef = useRef<SwiperRef>(null)
     const [activeIndex, setActiveIndex] = useState(0)
 
@@ -45,7 +53,7 @@ export default function InfoTabs() {
                 }}
             >
                 <Swiper.Item className="overflow-y-auto dialysis-tab">
-                    <DialysisTabPanel/>
+                    <DialysisTabPanel diaInfo={diaInfo}/>
                 </Swiper.Item>
                 <Swiper.Item className="overflow-y-auto">
                     <DrugTabPanel/>

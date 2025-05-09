@@ -1,16 +1,19 @@
-import {DiaStatus, RecordStatus} from "@/types/types";
+import {DialysisStatus, DiaStatus} from "@/types/types";
 
 export const timeFormats = {
-    date: 'YYYYMMDD',
-    datetime: 'YYYY/MM/DD HH:mm',
+    compactDate: 'YYYYMMDD',
+    dashedDate: 'YYYY-MM-DD',
+    slashDate: 'YYYY/MM/DD',
+    slashDatetime: 'YYYY/MM/DD HH:mm',
+    aTime: 'HH:mm',
 };
 /**
  * カレンダー用状態と対応するタグの色
  */
-export const statusColorMap: Map<RecordStatus, string> = new Map([
-    ['normal', 'success'],
-    ['abnormal', 'warning'],
-    ['active', 'primary'],
+export const statusColorMap: Map<DialysisStatus, string> = new Map([
+    [4, 'success'],
+    [0, 'warning'],
+    [-1, 'primary'],
 ]);
 /**
  * 透析状態
@@ -23,3 +26,7 @@ export const diaStatus: DiaStatus = {
     dialysisDone: 3,       // 透析完了
     weighedAfter: 4        // 後体重測定済
 }
+
+export const patientId = 10001;
+
+export const baseUrl: string = 'http://localhost:8080/dialysis/';
