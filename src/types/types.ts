@@ -41,6 +41,7 @@ export type DiaRec = {
  * 透析情報
  */
 export type DialysisInfo = {
+    sessionId: number,
     // 時間・スケジュール（Date型で扱いやすく）
     // 予約時間
     reservationTime: Date;
@@ -88,4 +89,18 @@ export type DialysisInfo = {
     ufTarget: number;
     // 実際除水量（kg）
     ufActual?: number;
+    bps?: BloodPressure[];
+    temps?: Temperature[];
+}
+
+type Temperature = {
+    measureAt: Date;
+    temperature: number;
+}
+
+type BloodPressure = {
+    measureAt: Date;
+    systolicBp: number;
+    diastolicBp: number;
+    pulse: number;
 }

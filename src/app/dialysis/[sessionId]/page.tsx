@@ -1,0 +1,82 @@
+'use client'
+
+import {Card, List, Skeleton, Space} from "antd-mobile";
+import {useEffect, useState} from "react";
+import {DialysisInfo} from "@/types/types";
+import {useParams} from "next/navigation";
+import {fetchDiaDetail} from "@/lib/dialysisApi";
+import dayjs from "dayjs";
+import {timeFormats} from "@/constants/constants";
+
+export default function Page() {
+    const [diaInfo, setDiaInfo] = useState<DialysisInfo | undefined>(undefined);
+    const {sessionId} = useParams();
+    useEffect(() => {
+        if (typeof sessionId !== 'string') return;
+        (async () => setDiaInfo(await fetchDiaDetail(Number(sessionId))))();
+    }, [sessionId]);
+    return (
+        diaInfo ?
+            <main className='min-h-screen p-4'>
+                <Space direction='vertical' className='w-full'>
+                    <Card title="基本情報">
+                        <List>
+                            <List.Item prefix="予約日時">{dayjs(diaInfo.reservationTime).format(timeFormats.slashDatetime)}</List.Item>
+                            <List.Item prefix="受付">{diaInfo.counterLocation}{diaInfo.counterName}</List.Item>
+                            <List.Item prefix="病棟">{diaInfo.wardName}</List.Item>
+                            <List.Item prefix="体重計">{diaInfo.scaleName}</List.Item>
+                            <List.Item prefix="ベッド">{diaInfo.bedNumber}</List.Item>
+                        </List>
+                    </Card>
+                    <Card title="透析スケジュール">
+                        <List>
+                            <List.Item prefix="予定時間">{diaInfo.expDiaMin} 分</List.Item>
+                            <List.Item prefix="到着">{dayjs(diaInfo.arrivedAt).format(timeFormats.time)}</List.Item>
+                            <List.Item prefix="開始">{dayjs(diaInfo.startedAt).format(timeFormats.time)}</List.Item>
+                            <List.Item prefix="終了">{dayjs(diaInfo.endAt).format(timeFormats.time)}</List.Item>
+                            <List.Item prefix="ステータス">終了</List.Item>
+                        </List>
+                    </Card>
+                    <Card title="体重・除水">
+                        <List>
+                            <List.Item prefix="透析前">{diaInfo.weightBefore}kg（{dayjs(diaInfo.weightBeforeAt).format(timeFormats.time)}）</List.Item>
+                            <List.Item prefix="ドライ">{diaInfo.dryWeight}kg</List.Item>
+                            <List.Item prefix="目標除水">{diaInfo.ufTarget}ℓ</List.Item>
+                            <List.Item prefix="透析後">{diaInfo.weightAfter}kg（{dayjs(diaInfo.weightAfterAt).format(timeFormats.time)}）</List.Item>
+                            <List.Item prefix="実際除水">{diaInfo.ufActual}ℓ</List.Item>
+                        </List>
+                    </Card>
+                    <Card title="バイタル情報">
+                        <List>
+                            {diaInfo.bps?.map((v, index) => (
+                                <List.Item key={index}>
+                                    <div className="flex justify-between">
+                                        <span>{dayjs(v.measureAt).format(timeFormats.time)}</span>
+                                        <span>血圧: {v.systolicBp}/{v.diastolicBp}</span>
+                                        <span>脈拍: {v.pulse}</span>
+                                    </div>
+                                </List.Item>
+                            ))}
+                            {diaInfo.temps?.map((v, index) => (
+                                <List.Item key={index}>
+                                    <div className="flex justify-between">
+                                        <span>{dayjs(v.measureAt).format(timeFormats.time)}</span>
+                                        <span>体温: {v.temperature}</span>
+                                    </div>
+                                </List.Item>
+                            ))}
+                        </List>
+                    </Card>
+                    <Card title="担当者">
+                        <List>
+                            <List.Item prefix="医師">{diaInfo.doctorName}</List.Item>
+                            <List.Item prefix="技師">{diaInfo.technicianName}</List.Item>
+                            <List.Item prefix="看護師">{diaInfo.nurseName}</List.Item>
+                        </List>
+                    </Card>
+                </Space>
+            </main>
+            :
+            <Skeleton.Paragraph className='p-5' lineCount={5} animated/>
+    )
+};

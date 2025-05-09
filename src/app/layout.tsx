@@ -1,5 +1,6 @@
 import type {Metadata} from "next";
 import "./globals.css";
+import {DiaSessionProvider} from "@/context/DiaSessionContext";
 
 export const metadata: Metadata = {
     title: "MIZUNOWA",
@@ -20,7 +21,9 @@ export default function RootLayout({
             />
         </head>
         <body>
-        {children}
+        <DiaSessionProvider>
+            {children}
+        </DiaSessionProvider>
         </body>
         </html>
     );

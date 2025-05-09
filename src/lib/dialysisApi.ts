@@ -42,7 +42,24 @@ export const fetchDiaInfo = async (sessionId: number | undefined): Promise<Dialy
     const url = `${baseUrl}${sessionId}/record`;
     const raw = await fetchClient<DialysisInfo>(url);
 
-    // 時刻を Date 型に変換
+    setDiaTime(raw);
+    return raw;
+};
+
+/**
+ * セッションIDを指定して透析記録の詳細情報を取得する
+ * @param sessionId - セッションID
+ * @returns 詳細な透析記録データ
+ */
+export const fetchDiaDetail = async (sessionId: number): Promise<DialysisInfo> => {
+    const raw = await fetchClient<DialysisInfo>(`${baseUrl}${sessionId}/detail`);
+
+    setDiaTime(raw);
+    return raw;
+};
+
+// 時刻を Date 型に変換
+const setDiaTime = (raw: DialysisInfo) => {
     const sessionDate = raw.sessionDate;
     raw.arrivedAt = raw.arrivedAt && new Date(`${sessionDate} ${raw.arrivedAt}`);
     raw.endAt = raw.endAt && new Date(`${sessionDate} ${raw.endAt}`);
@@ -51,5 +68,6 @@ export const fetchDiaInfo = async (sessionId: number | undefined): Promise<Dialy
     raw.startedAt = raw.startedAt && new Date(`${sessionDate} ${raw.startedAt}`);
     raw.weightAfterAt = raw.weightAfterAt && new Date(`${sessionDate} ${raw.weightAfterAt}`);
     raw.weightBeforeAt = raw.weightBeforeAt && new Date(`${sessionDate} ${raw.weightBeforeAt}`);
-    return raw;
-};
+    raw.bps?.forEach(bp => bp.measureAt = new Date(`${sessionDate} ${bp.measureAt}`));
+    raw.temps?.forEach(temp => temp.measureAt = new Date(`${sessionDate} ${temp.measureAt}`));
+}

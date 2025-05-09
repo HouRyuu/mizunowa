@@ -5,7 +5,7 @@ export const timeFormats = {
     dashedDate: 'YYYY-MM-DD',
     slashDate: 'YYYY/MM/DD',
     slashDatetime: 'YYYY/MM/DD HH:mm',
-    aTime: 'HH:mm',
+    time: 'HH:mm',
 };
 /**
  * カレンダー用状態と対応するタグの色

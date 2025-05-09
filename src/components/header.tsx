@@ -8,7 +8,7 @@ const playfairDisplay = Playfair_Display({
 
 export default function Header() {
     return (
-        <header className={'p-1.5 border-b border-gray-200'}>
+        <header className='p-1.5 border-b border-gray-200'>
             <Grid columns={2} style={{alignItems: 'flex-end'}}>
                 <Grid.Item className={`${playfairDisplay.className} text-3xl`}>MIZUNOWA</Grid.Item>
                 <Grid.Item className={'text-right'}>
