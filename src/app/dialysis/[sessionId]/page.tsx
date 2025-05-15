@@ -7,6 +7,10 @@ import {useParams} from "next/navigation";
 import {fetchDiaDetail} from "@/lib/dialysisApi";
 import dayjs from "dayjs";
 import {timeFormats} from "@/constants/constants";
+import VitalChat from "@/components/dialysis/chats/vitalChat";
+import TempChat from "@/components/dialysis/chats/tempChat";
+import WeightChat from "@/components/dialysis/chats/weightChat";
+
 
 export default function Page() {
     const [diaInfo, setDiaInfo] = useState<DialysisInfo | undefined>(undefined);
@@ -38,34 +42,20 @@ export default function Page() {
                         </List>
                     </Card>
                     <Card title="体重・除水">
-                        <List>
+                        <WeightChat diaInfo={diaInfo}/>
+                        {/*<List>
                             <List.Item prefix="透析前">{diaInfo.weightBefore}kg（{dayjs(diaInfo.weightBeforeAt).format(timeFormats.time)}）</List.Item>
                             <List.Item prefix="ドライ">{diaInfo.dryWeight}kg</List.Item>
                             <List.Item prefix="目標除水">{diaInfo.ufTarget}ℓ</List.Item>
                             <List.Item prefix="透析後">{diaInfo.weightAfter}kg（{dayjs(diaInfo.weightAfterAt).format(timeFormats.time)}）</List.Item>
                             <List.Item prefix="実際除水">{diaInfo.ufActual}ℓ</List.Item>
-                        </List>
+                        </List>*/}
                     </Card>
                     <Card title="バイタル情報">
-                        <List>
-                            {diaInfo.bps?.map((v, index) => (
-                                <List.Item key={index}>
-                                    <div className="flex justify-between">
-                                        <span>{dayjs(v.measureAt).format(timeFormats.time)}</span>
-                                        <span>血圧: {v.systolicBp}/{v.diastolicBp}</span>
-                                        <span>脈拍: {v.pulse}</span>
-                                    </div>
-                                </List.Item>
-                            ))}
-                            {diaInfo.temps?.map((v, index) => (
-                                <List.Item key={index}>
-                                    <div className="flex justify-between">
-                                        <span>{dayjs(v.measureAt).format(timeFormats.time)}</span>
-                                        <span>体温: {v.temperature}</span>
-                                    </div>
-                                </List.Item>
-                            ))}
-                        </List>
+                        <VitalChat bps={diaInfo.bps}/>
+                    </Card>
+                    <Card title="体温">
+                        <TempChat temps={diaInfo.temps}/>
                     </Card>
                     <Card title="担当者">
                         <List>

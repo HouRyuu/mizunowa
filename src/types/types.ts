@@ -93,12 +93,12 @@ export type DialysisInfo = {
     temps?: Temperature[];
 }
 
-type Temperature = {
+export type Temperature = {
     measureAt: Date;
     temperature: number;
 }
 
-type BloodPressure = {
+export type BloodPressure = {
     measureAt: Date;
     systolicBp: number;
     diastolicBp: number;

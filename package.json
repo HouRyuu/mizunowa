@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ant-design/charts": "^2.2.7",
     "antd-mobile": "^5.39.0",
     "dayjs": "^1.11.13",
     "next": "15.3.0",
