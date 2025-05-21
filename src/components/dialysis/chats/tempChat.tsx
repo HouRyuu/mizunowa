@@ -1,29 +1,33 @@
-import {Temperature} from "@/types/types";
-import {Line} from "@ant-design/plots";
+import {LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Legend} from "recharts";
 import dayjs from "dayjs";
 import {timeFormats} from "@/constants/constants";
+import {Temperature} from "@/types/types";
 
-/**
- * 体温図表
- * @param temps 体温
- * @constructor
- */
 export default function TempChat({temps = []}: { temps: Temperature[] | undefined }) {
-    const config = {
-        data: temps.map(temp => {
-            return {
-                measureAt: dayjs(temp.measureAt).format(timeFormats.time),
-                temperature: temp.temperature,
-                type: '体温',
-            }
-        }),
-        xField: 'measureAt',
-        yField: 'temperature',
-        colorField: 'type',
-        style: {
-            lineWidth: 2,
-        },
-        height: 200, // 控制图表高度，适合移动端
-    };
-    return <Line {...config} />;
+    // データ整形
+    const chartData = temps.map(temp => ({
+        measureAt: dayjs(temp.measureAt).format(timeFormats.time),
+        体温: temp.temperature,
+    }));
+
+    return (
+        <ResponsiveContainer width="100%" height={200}>
+            <LineChart data={chartData}>
+                <CartesianGrid strokeDasharray="5 5" vertical={false}/>
+                <XAxis dataKey="measureAt" axisLine={false}/>
+                <YAxis axisLine={false}/>
+                <Tooltip contentStyle={{borderRadius: 6}}/>
+                <Legend verticalAlign="top" align="right" iconType="line"
+                        formatter={(value) => `${value}(℃)`}/>
+                <Line
+                    type="monotone"
+                    dataKey="体温"
+                    stroke="#FF7043"
+                    strokeWidth={2}
+                    dot
+                    unit="℃"
+                />
+            </LineChart>
+        </ResponsiveContainer>
+    );
 }

@@ -41,28 +41,21 @@ export default function Page() {
                             <List.Item prefix="ステータス">終了</List.Item>
                         </List>
                     </Card>
-                    <Card title="体重・除水">
-                        <WeightChat diaInfo={diaInfo}/>
-                        {/*<List>
-                            <List.Item prefix="透析前">{diaInfo.weightBefore}kg（{dayjs(diaInfo.weightBeforeAt).format(timeFormats.time)}）</List.Item>
-                            <List.Item prefix="ドライ">{diaInfo.dryWeight}kg</List.Item>
-                            <List.Item prefix="目標除水">{diaInfo.ufTarget}ℓ</List.Item>
-                            <List.Item prefix="透析後">{diaInfo.weightAfter}kg（{dayjs(diaInfo.weightAfterAt).format(timeFormats.time)}）</List.Item>
-                            <List.Item prefix="実際除水">{diaInfo.ufActual}ℓ</List.Item>
-                        </List>*/}
-                    </Card>
-                    <Card title="バイタル情報">
-                        <VitalChat bps={diaInfo.bps}/>
-                    </Card>
-                    <Card title="体温">
-                        <TempChat temps={diaInfo.temps}/>
-                    </Card>
                     <Card title="担当者">
                         <List>
                             <List.Item prefix="医師">{diaInfo.doctorName}</List.Item>
                             <List.Item prefix="技師">{diaInfo.technicianName}</List.Item>
                             <List.Item prefix="看護師">{diaInfo.nurseName}</List.Item>
                         </List>
+                    </Card>
+                    <Card title="体重・除水">
+                        <WeightChat diaInfo={diaInfo}/>
+                    </Card>
+                    <Card title="バイタル情報">
+                        <VitalChat bps={diaInfo.bps}/>
+                    </Card>
+                    <Card title="体温">
+                        <TempChat temps={diaInfo.temps}/>
                     </Card>
                 </Space>
             </main>
