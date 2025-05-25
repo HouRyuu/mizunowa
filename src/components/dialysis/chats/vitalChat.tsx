@@ -28,7 +28,7 @@ export default function VitalChat({bps = []}: Props) {
     );
 
     return (
-        <ResponsiveContainer width="100%" height={330}>
+        <ResponsiveContainer width="100%" height={330} className="bg-white">
             <ComposedChart data={chartData}>
                 <Legend verticalAlign="top" align="right" iconType="rect"/>
                 <CartesianGrid strokeDasharray="5 5" vertical={false}/>
@@ -36,9 +36,9 @@ export default function VitalChat({bps = []}: Props) {
                 <YAxis yAxisId="left" domain={[0, maxBpTotal]} axisLine={false}/>
                 <YAxis yAxisId="right" orientation="right" axisLine={false}/>
                 <Tooltip contentStyle={{borderRadius: 6}}/>
-                <Bar yAxisId="left" dataKey="収縮" stackId="a" fill="#FF9800" barSize={24} label={{fill: '#fff'}}/>
-                <Bar yAxisId="left" dataKey="拡張" stackId="a" fill="#EF5350" barSize={24} label={{fill: '#fff'}}/>
-                <Line yAxisId="right" type="monotone" dataKey="脈拍" stroke="#9E8BdA" strokeWidth={2} dot/>
+                <Bar yAxisId="left" dataKey="収縮" stackId="a" fill="rgb(0,181,120)" barSize={24} label={{fill: '#fff'}}/>
+                <Bar yAxisId="left" dataKey="拡張" stackId="a" fill="rgb(255,144,31)" barSize={24} label={{fill: '#fff'}}/>
+                <Line yAxisId="right" type="monotone" dataKey="脈拍" stroke="rgb(22,119,255)" strokeWidth={2} dot/>
             </ComposedChart>
         </ResponsiveContainer>
     );

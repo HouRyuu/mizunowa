@@ -22,7 +22,7 @@ export default function WeightChat({diaInfo}: { diaInfo: DialysisInfo }) {
         },
     ];
 
-    return <ResponsiveContainer width="100%" height={200}>
+    return <ResponsiveContainer width="100%" height={200} className="bg-white">
         <BarChart data={data}>
             <Legend verticalAlign="top" align="right" iconType="rect"
                     formatter={(value) => value === '体重' ? `${value}(㎏)` : `${value}(ℓ)`}
@@ -33,14 +33,14 @@ export default function WeightChat({diaInfo}: { diaInfo: DialysisInfo }) {
             <Tooltip contentStyle={{borderRadius: 6}}/>
             <Bar
                 dataKey="体重"
-                fill="#FF9800"
+                fill="rgb(255,144,31)"
                 barSize={36}
                 label={{fill: '#fff'}}
                 unit='㎏'
             />
             <Bar
                 dataKey="除水量"
-                fill="#039BE5"
+                fill="rgb(22,119,255)"
                 barSize={36}
                 label={{fill: '#fff'}}
                 minPointSize={12}

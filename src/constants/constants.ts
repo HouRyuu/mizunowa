@@ -29,4 +29,4 @@ export const diaStatus: DiaStatus = {
 
 export const patientId = 10001;
 
-export const baseUrl: string = 'http://localhost:8080/dialysis/';
+export const baseUrl: string = 'http://192.168.1.107:8080/dialysis/';

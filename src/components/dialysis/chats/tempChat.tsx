@@ -11,7 +11,7 @@ export default function TempChat({temps = []}: { temps: Temperature[] | undefine
     }));
 
     return (
-        <ResponsiveContainer width="100%" height={200}>
+        <ResponsiveContainer width="100%" height={200} className="bg-white">
             <LineChart data={chartData}>
                 <CartesianGrid strokeDasharray="5 5" vertical={false}/>
                 <XAxis dataKey="measureAt" axisLine={false}/>
@@ -22,7 +22,7 @@ export default function TempChat({temps = []}: { temps: Temperature[] | undefine
                 <Line
                     type="monotone"
                     dataKey="体温"
-                    stroke="#FF7043"
+                    stroke="rgb(255,144,31)"
                     strokeWidth={2}
                     dot
                     unit="℃"
