@@ -1,4 +1,4 @@
-import {Calendar, Tag} from "antd-mobile";
+import {Calendar, Grid, Tag} from "antd-mobile";
 import dayjs from "dayjs";
 import {timeFormats, statusColorMap} from "@/constants/constants";
 import {DialysisDateRange, DiaRec} from "@/types/types";
@@ -21,9 +21,9 @@ export default function DialysisCalendar({diaDateRange, diaRecordStatusMap}: Pro
         setSessionId(diaRecordStatusMap.get(curDate)?.sessionId);
     }, []);
     return (
-        <>
+        <section
+            className={'border-b border-gray-200'}>
             <Calendar
-                className={'border-b border-gray-200'}
                 selectionMode='single'
                 min={diaDateRange.minDate}
                 max={diaDateRange.maxDate}
@@ -35,6 +35,11 @@ export default function DialysisCalendar({diaDateRange, diaRecordStatusMap}: Pro
                     return recordStatus ? <Tag round color={compactDate === curDate ? 'warning' : statusColorMap.get(recordStatus)}/> : <></>;
                 }}
             />
-        </>
+            <Grid columns={3} className='text-center'>
+                <Grid.Item><Tag round color='success'/>透析済み</Grid.Item>
+                <Grid.Item><Tag round color='warning'/>今日の透析</Grid.Item>
+                <Grid.Item><Tag round color='primary'/>透析予約</Grid.Item>
+            </Grid>
+        </section>
     );
 }

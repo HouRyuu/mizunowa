@@ -20,7 +20,7 @@ export default function DialysisTabPanel({diaInfo}: Props) {
     return (
         diaInfo ?
             <Steps
-                className="mt-5"
+                className="mt-1"
                 direction="vertical"
                 current={diaInfo.status > diaStatus.dialyzing ? diaInfo.status - 1 : diaInfo.status}>
                 <Step
@@ -121,7 +121,7 @@ export default function DialysisTabPanel({diaInfo}: Props) {
             :
             <ErrorBlock
                 status='empty'
-                className='mt-20'
+                className='mt-10'
                 style={{
                     '--image-height': '150px',
                 }}
