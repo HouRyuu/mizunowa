@@ -7,7 +7,7 @@ import DietTabPanel from "@/components/diet/dietTabPanel";
 import {Swiper, TabBar} from "antd-mobile";
 import {useRef, useState} from "react";
 import "./style.css";
-import {DialysisInfo} from "@/types/types";
+import {DialysisInfo, MedicationRecord, MedicationTiming} from "@/types/types";
 
 const tabItems = [
     {
@@ -28,17 +28,17 @@ const tabItems = [
 ];
 
 interface Props {
-    diaInfo?: DialysisInfo
+    diaInfo?: DialysisInfo;
+    medicationRecords?: Map<MedicationTiming, MedicationRecord[]>;
 }
 
 /**
  * 情報タブコンテナ
  * @constructor
  */
-export default function InfoTabs({diaInfo}: Props) {
+export default function InfoTabs({diaInfo, medicationRecords}: Props) {
     const swiperRef = useRef<SwiperRef>(null)
     const [activeIndex, setActiveIndex] = useState(0)
-
     return (
         <section className="flex-1 flex flex-col overflow-hidden">
             <Swiper
@@ -56,7 +56,7 @@ export default function InfoTabs({diaInfo}: Props) {
                     <DialysisTabPanel diaInfo={diaInfo}/>
                 </Swiper.Item>
                 <Swiper.Item className="overflow-y-auto">
-                    <DrugTabPanel/>
+                    <DrugTabPanel medicationRecords={medicationRecords}/>
                 </Swiper.Item>
                 <Swiper.Item className="overflow-y-auto">
                     <DietTabPanel/>

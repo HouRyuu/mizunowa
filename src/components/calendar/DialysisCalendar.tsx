@@ -16,9 +16,10 @@ interface Props {
  */
 export default function DialysisCalendar({diaDateRange, diaRecordStatusMap}: Props) {
     const curDate = dayjs(new Date()).format(timeFormats.compactDate);
-    const {setSessionId} = useDiaSession();
+    const {setSessionId, setDiaDate} = useDiaSession();
     useEffect(() => {
         setSessionId(diaRecordStatusMap.get(curDate)?.sessionId);
+        setDiaDate(new Date());
     }, []);
     return (
         <section
@@ -28,7 +29,12 @@ export default function DialysisCalendar({diaDateRange, diaRecordStatusMap}: Pro
                 min={diaDateRange.minDate}
                 max={diaDateRange.maxDate}
                 defaultValue={new Date()}
-                onChange={date => setSessionId(diaRecordStatusMap.get(dayjs(date).format(timeFormats.compactDate))?.sessionId)}
+                onChange={date => {
+                    setSessionId(diaRecordStatusMap.get(dayjs(date).format(timeFormats.compactDate))?.sessionId);
+                    if (date) {
+                        setDiaDate(date);
+                    }
+                }}
                 renderLabel={date => {
                     const compactDate = dayjs(date).format(timeFormats.compactDate);
                     const recordStatus = diaRecordStatusMap.get(compactDate)?.status;

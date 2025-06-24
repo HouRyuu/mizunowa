@@ -27,9 +27,9 @@ export async function fetchClient<T>(input: string | URL | Request, options?: Fe
     }
     switch (parse) {
         case "json":
-            return res.json() as Promise<T>;
+            return await res.json() as Promise<T>;
         case "text":
-            return res.text() as unknown as T;
+            return await res.text() as unknown as T;
         case "none":
             return undefined as unknown as T;
     }

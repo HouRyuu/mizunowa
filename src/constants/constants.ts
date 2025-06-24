@@ -1,4 +1,4 @@
-import {DialysisStatus, DiaStatus} from "@/types/types";
+import {DialysisStatus, DiaStatus, MedicationTiming} from "@/types/types";
 
 export const timeFormats = {
     compactDate: 'YYYYMMDD',
@@ -29,4 +29,12 @@ export const diaStatus: DiaStatus = {
 
 export const patientId = 10001;
 
-export const baseUrl: string = 'http://192.168.1.107:8080/dialysis/';
+export const baseUrl: string = 'http://localhost:8080/dialysis/';
+
+export const timingMap: Map<MedicationTiming, string> = new Map([
+    ['AM', '朝'],
+    ['NOON', '昼'],
+    ['PM', '夕'],
+    ['BED', '就寝前'],
+    ['OTHR', 'その他'],
+]);

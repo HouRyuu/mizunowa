@@ -28,7 +28,7 @@ export default function VitalChat({bps = []}: Props) {
     );
 
     return (
-        <ResponsiveContainer width="100%" height={330} className="bg-white">
+        <ResponsiveContainer width="100%" height={200} className="bg-white">
             <ComposedChart data={chartData}>
                 <Legend verticalAlign="top" align="right" iconType="rect"/>
                 <CartesianGrid strokeDasharray="5 5" vertical={false}/>

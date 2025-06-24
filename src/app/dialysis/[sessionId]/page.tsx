@@ -11,6 +11,7 @@ import VitalChat from "@/components/dialysis/chats/vitalChat";
 import TempChat from "@/components/dialysis/chats/tempChat";
 import WeightChat from "@/components/dialysis/chats/weightChat";
 import {ClockCircleFill, FilterOutline, FireFill, HeartFill, LocationFill, TeamFill} from "antd-mobile-icons";
+import {getTimeView} from "@/utils/timeUtil";
 
 
 export default function Page() {
@@ -38,7 +39,7 @@ export default function Page() {
                     <Card icon={<ClockCircleFill fontSize='var(--adm-font-size-7)'/>}
                           title="透析スケジュール">
                         <List>
-                            <List.Item prefix="予定時間">{diaInfo.expDiaMin} 分</List.Item>
+                            <List.Item prefix="予定時間">{getTimeView(diaInfo.expDiaMin)}</List.Item>
                             <List.Item prefix="到着">{dayjs(diaInfo.arrivedAt).format(timeFormats.time)}</List.Item>
                             <List.Item prefix="開始">{dayjs(diaInfo.startedAt).format(timeFormats.time)}</List.Item>
                             <List.Item prefix="終了">{dayjs(diaInfo.endAt).format(timeFormats.time)}</List.Item>

@@ -104,3 +104,19 @@ export type BloodPressure = {
     diastolicBp: number;
     pulse: number;
 }
+
+/**
+ * 服薬時間帯
+ */
+export type MedicationTiming = 'AM' | 'NOON' | 'PM' | 'BED' | 'OTHR';
+
+export type MedicationRecord = {
+    itemId: number;
+    medicationName: string;
+    dosage: string;
+    frequency: string;
+    timing: MedicationTiming;
+    recordId?: number;
+    takenDate?: Date;
+    takenFlag?: boolean;
+};
