@@ -93,7 +93,7 @@ export default function DrugTabPanel({medicationRecords}: Props) {
                 >
                     <CheckList
                         multiple
-                        disabled={isFuture}
+                        readOnly={isFuture}
                         extra={active => active ? <FaceRecognitionOutline/> : <FrownOutline/>}
                         value={checkedList}
                         onChange={(value) => handleCheckChange(timing, records, value as string[])}

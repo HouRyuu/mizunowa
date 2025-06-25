@@ -1,5 +1,7 @@
 import {DialysisStatus, DiaStatus, MedicationTiming} from "@/types/types";
 
+export const apiBaseUrl: string = 'http://lpc-4223:8080';
+
 export const timeFormats = {
     compactDate: 'YYYYMMDD',
     dashedDate: 'YYYY-MM-DD',
@@ -28,8 +30,6 @@ export const diaStatus: DiaStatus = {
 }
 
 export const patientId = 10001;
-
-export const baseUrl: string = 'http://localhost:8080/dialysis/';
 
 export const timingMap: Map<MedicationTiming, string> = new Map([
     ['AM', '朝'],

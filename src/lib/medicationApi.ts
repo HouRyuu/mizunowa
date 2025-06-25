@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import {MedicationRecord, MedicationTiming} from "@/types/types";
 import {fetchClient} from "@/lib/fetchClient";
 
-const baseUrl = 'http://localhost:8080/medication';
+const baseUrl = '/medication';
 /**
  * 服薬記録を登録または更新する
  */

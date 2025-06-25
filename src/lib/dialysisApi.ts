@@ -1,14 +1,16 @@
-import {baseUrl, patientId, timeFormats} from "@/constants/constants";
+import {patientId, timeFormats} from "@/constants/constants";
 import dayjs from "dayjs";
 import {DialysisDateRange, DialysisInfo, DiaRec} from "@/types/types";
 import {fetchClient} from "@/lib/fetchClient";
+
+const baseUrl = '/dialysis';
 
 /**
  * 透析記録の期間を取得する
  * @returns 最小日付と最大日付
  */
 export const fetchDiaDateRange = async (): Promise<DialysisDateRange> => {
-    const url = `${baseUrl}${patientId}/dateRange`;
+    const url = `${baseUrl}/${patientId}/dateRange`;
     const raw = await fetchClient<{ minDate: string; maxDate: string }>(url);
     return {
         minDate: new Date(raw.minDate),
@@ -26,7 +28,7 @@ export const fetchDiaRecordStatusMap = async (
 ): Promise<Map<string, DiaRec>> => {
     const min = dayjs(dialysisDateRange.minDate).format(timeFormats.dashedDate);
     const max = dayjs(dialysisDateRange.maxDate).format(timeFormats.dashedDate);
-    const url = `${baseUrl}${patientId}/dateRange/${min}/${max}/records`;
+    const url = `${baseUrl}/${patientId}/dateRange/${min}/${max}/records`;
 
     const raw = await fetchClient<DiaRec[]>(url);
     return new Map<string, DiaRec>(raw.map((row) => [dayjs(row.sessionDate).format(timeFormats.compactDate), row]));
@@ -39,7 +41,7 @@ export const fetchDiaRecordStatusMap = async (
  */
 export const fetchDiaInfo = async (sessionId: number | undefined): Promise<DialysisInfo> => {
     if (sessionId === undefined) throw new Error("セッションIDが未指定です");
-    const url = `${baseUrl}${sessionId}/record`;
+    const url = `${baseUrl}/${sessionId}/record`;
     const raw = await fetchClient<DialysisInfo>(url);
 
     setDiaTime(raw);

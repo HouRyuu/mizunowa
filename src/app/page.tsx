@@ -1,7 +1,7 @@
 'use client'
 
 import {useEffect, useState} from 'react';
-import {ConfigProvider, DotLoading} from "antd-mobile";
+import {ConfigProvider, SpinLoading} from "antd-mobile";
 import jaJP from "antd-mobile/es/locales/ja-JP";
 import DialysisCalendar from "@/components/calendar/DialysisCalendar";
 import Header from "@/components/header";
@@ -38,7 +38,9 @@ export default function Home() {
         })();
     }, [sessionId, diaDate]);
     if (!diaDateRange || !diaRecordStatusMap) {
-        return <DotLoading/>;
+        return <div className="fixed inset-0 flex items-center justify-center">
+            <SpinLoading color='currentColor' style={{ '--size': '48px' }}/>
+        </div>;
     }
     return (
         <ConfigProvider
