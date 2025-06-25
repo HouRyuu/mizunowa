@@ -1,6 +1,6 @@
 import {DialysisStatus, DiaStatus, MedicationTiming} from "@/types/types";
 
-export const apiBaseUrl: string = 'http://lpc-4223:8080';
+export const apiBaseUrl: string = 'http://172.18.32.134:8080';
 
 export const timeFormats = {
     compactDate: 'YYYYMMDD',

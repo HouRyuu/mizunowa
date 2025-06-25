@@ -54,7 +54,7 @@ export const fetchDiaInfo = async (sessionId: number | undefined): Promise<Dialy
  * @returns 詳細な透析記録データ
  */
 export const fetchDiaDetail = async (sessionId: number): Promise<DialysisInfo> => {
-    const raw = await fetchClient<DialysisInfo>(`${baseUrl}${sessionId}/detail`);
+    const raw = await fetchClient<DialysisInfo>(`${baseUrl}/${sessionId}/detail`);
 
     setDiaTime(raw);
     return raw;
