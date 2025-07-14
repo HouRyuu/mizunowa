@@ -1,19 +1,19 @@
 'use client'
 
-import {createContext, useContext, useState} from 'react'
+import React, {createContext, useContext, useState} from 'react'
 
 type DiaSessionContextType = {
     sessionId: number | undefined
     setSessionId: (id: number | undefined) => void
-    diaDate: Date
-    setDiaDate: (date: Date) => void
+    diaDate: Date | undefined
+    setDiaDate: (date: Date | undefined) => void
 }
 
 const DiaSessionContext = createContext<DiaSessionContextType | undefined>(undefined)
 
 export const DiaSessionProvider = ({children}: { children: React.ReactNode }) => {
     const [sessionId, setSessionId] = useState<number | undefined>(undefined);
-    const [diaDate, setDiaDate] = useState<Date>(new Date());
+    const [diaDate, setDiaDate] = useState<Date | undefined>(undefined);
 
     return (
         <DiaSessionContext.Provider value={{sessionId, setSessionId, diaDate, setDiaDate}}>

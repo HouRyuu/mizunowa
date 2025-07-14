@@ -5,9 +5,13 @@ import DialysisTabPanel from "@/components/dialysis/dialysisTabPanel";
 import DrugTabPanel from "@/components/drug/drugTabPanel";
 import DietTabPanel from "@/components/diet/dietTabPanel";
 import {Swiper, TabBar} from "antd-mobile";
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import "./style.css";
-import {DialysisInfo, MedicationRecord, MedicationTiming} from "@/types/types";
+import {DialysisInfo, DietRecord, MedicationRecord, MedicationTiming} from "@/types/types";
+import {useDiaSession} from "@/context/DiaSessionContext";
+import {fetchDiaInfo} from "@/lib/dialysisApi";
+import {fetchMedicationRecordsByDate} from "@/lib/medicationApi";
+import {fetchDietRecordsByDate} from "@/lib/dietApi";
 
 const tabItems = [
     {
@@ -27,18 +31,27 @@ const tabItems = [
     },
 ];
 
-interface Props {
-    diaInfo?: DialysisInfo;
-    medicationRecords?: Map<MedicationTiming, MedicationRecord[]>;
-}
-
 /**
- * 情報タブコンテナ
+ * 表示透析情報、服薬記録、飲食記録のタブを切り替える
  * @constructor
  */
-export default function InfoTabs({diaInfo, medicationRecords}: Props) {
+export default function InfoTabs() {
     const swiperRef = useRef<SwiperRef>(null)
     const [activeIndex, setActiveIndex] = useState(0)
+    const {sessionId, diaDate} = useDiaSession();
+    const [diaInfo, setDiaInfo] = useState<DialysisInfo | undefined>(undefined);
+    const [medicationRecords, setMedicationRecords] = useState<Map<MedicationTiming, MedicationRecord[]> | undefined>(undefined);
+    const [dietRecords, setDietRecords] = useState<DietRecord[]>([]);
+    useEffect(() => {
+        if (!diaDate) {
+            return;
+        }
+        (async () => {
+            setDiaInfo(sessionId ? await fetchDiaInfo(sessionId) : undefined);
+            setMedicationRecords(await fetchMedicationRecordsByDate(diaDate));
+            setDietRecords(await fetchDietRecordsByDate(diaDate));
+        })();
+    }, [sessionId, diaDate]);
     return (
         <section className="flex-1 flex flex-col overflow-hidden">
             <Swiper
@@ -59,7 +72,7 @@ export default function InfoTabs({diaInfo, medicationRecords}: Props) {
                     <DrugTabPanel medicationRecords={medicationRecords}/>
                 </Swiper.Item>
                 <Swiper.Item className="overflow-y-auto">
-                    <DietTabPanel/>
+                    <DietTabPanel dietRecords={dietRecords}/>
                 </Swiper.Item>
             </Swiper>
             <TabBar

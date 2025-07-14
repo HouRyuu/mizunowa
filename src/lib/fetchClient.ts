@@ -1,3 +1,5 @@
+'use client'
+
 import {apiBaseUrl} from "@/constants/constants";
 
 export interface FetchOptions extends RequestInit {
@@ -12,27 +14,30 @@ export interface FetchOptions extends RequestInit {
  */
 export async function fetchClient<T>(input: string | URL | Request, options?: FetchOptions): Promise<T> {
     const {parse = "json", skipErrorHandler = false, ...fetchOptions} = options || {};
-
-    const res = await fetch(`${apiBaseUrl}${input}`, {
-        headers: {
-            "Content-Type": "application/json",
-            ...(fetchOptions.headers || {}),
-        },
-        ...fetchOptions,
-    });
-
-    if (!res.ok) {
-        if (!skipErrorHandler) {
+    try {
+        const res = await fetch(`${apiBaseUrl}${input}`, {
+            headers: {
+                "Content-Type": "application/json",
+                ...(fetchOptions.headers || {}),
+            },
+            ...fetchOptions,
+        });
+        if (!res.ok && !skipErrorHandler) {
             console.error(`[fetchClient] エラー: ${res.status} ${res.statusText}`);
+            throw new Error(`HTTP error: ${res.status}`);
         }
-        throw new Error(`HTTP error: ${res.status}`);
-    }
-    switch (parse) {
-        case "json":
-            return await res.json() as Promise<T>;
-        case "text":
-            return await res.text() as unknown as T;
-        case "none":
-            return undefined as unknown as T;
+        switch (parse) {
+            case "json":
+                return await res.json() as Promise<T>;
+            case "text":
+                return await res.text() as unknown as T;
+            case "none":
+                return undefined as unknown as T;
+        }
+    } catch (e) {
+        if (!skipErrorHandler) {
+            console.error(`[fetchClient] 通信例外:`, e);
+        }
+        throw e;
     }
 }

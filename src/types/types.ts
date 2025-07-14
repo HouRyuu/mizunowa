@@ -120,3 +120,10 @@ export type MedicationRecord = {
     takenDate?: Date;
     takenFlag?: boolean;
 };
+
+export type DietRecord = {
+    patientId?: number;
+    dietDate?: Date;
+    meal: string;
+    foods: string;
+};
