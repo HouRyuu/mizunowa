@@ -12,6 +12,7 @@ import {useDiaSession} from "@/context/DiaSessionContext";
 import {fetchDiaInfo} from "@/lib/dialysisApi";
 import {fetchMedicationRecordsByDate} from "@/lib/medicationApi";
 import {fetchDietRecordsByDate} from "@/lib/dietApi";
+import dayjs from "dayjs";
 
 const tabItems = [
     {
@@ -49,7 +50,7 @@ export default function InfoTabs() {
         (async () => {
             setDiaInfo(sessionId ? await fetchDiaInfo(sessionId) : undefined);
             setMedicationRecords(await fetchMedicationRecordsByDate(diaDate));
-            setDietRecords(await fetchDietRecordsByDate(diaDate));
+            setDietRecords(dayjs(diaDate).isAfter(dayjs(), "day") ? [] : await fetchDietRecordsByDate(diaDate));
         })();
     }, [sessionId, diaDate]);
     return (

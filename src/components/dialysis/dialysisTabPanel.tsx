@@ -102,17 +102,22 @@ export default function DialysisTabPanel({diaInfo}: Props) {
                                     <>
                                         <li><strong className="text-black">透析後体重:{diaInfo.weightAfter}kg 実除水量:{diaInfo.ufActual}ℓ</strong></li>
                                         <li>透析お疲れさまでした。体調に気をつけて、ゆっくりお休みください。</li>
-                                        <li className='mt-2'>
-                                            <Link href={`/dialysis/${diaInfo.sessionId}`}>
-                                                <Button shape='rounded' color='primary' size='mini' fill='outline'>
-                                                    <Space className='align-bottom'>
-                                                        <LinkOutline fontSize='1rem'/>
-                                                        <span>透析記録</span>
-                                                    </Space>
-                                                </Button>
-                                            </Link>
-                                        </li>
                                     </>
+                            }
+                            {
+                                diaInfo.status > diaStatus.checkedIn ?
+                                    <li className='mt-2'>
+                                        <Link href={`/dialysis/${diaInfo.sessionId}`}>
+                                            <Button shape='rounded' color='primary' size='mini' fill='outline'>
+                                                <Space className='align-bottom'>
+                                                    <LinkOutline fontSize='1rem'/>
+                                                    <span>透析記録</span>
+                                                </Space>
+                                            </Button>
+                                        </Link>
+                                    </li>
+                                    :
+                                    <></>
                             }
                         </ul>
                     }

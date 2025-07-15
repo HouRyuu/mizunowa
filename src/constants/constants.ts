@@ -1,6 +1,6 @@
 import {DialysisStatus, DiaStatus, MedicationTiming} from "@/types/types";
 
-export const apiBaseUrl: string = 'http://localhost:8080';
+export const apiBaseUrl: string = '//mizunowa.com:8080';
 
 export const timeFormats = {
     compactDate: 'YYYYMMDD',
@@ -37,4 +37,13 @@ export const timingMap: Map<MedicationTiming, string> = new Map([
     ['PM', '夕'],
     ['BED', '就寝前'],
     ['OTHR', 'その他'],
+]);
+
+export const diaStatusMap: Map<DialysisStatus, string> = new Map([
+    [-1, '予約済'],
+    [0, '受付完了'],
+    [1, '前体重測定済'],
+    [2, '透析中'],
+    [3, '透析完了'],
+    [4, '後体重測定済']
 ]);

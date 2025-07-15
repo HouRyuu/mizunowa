@@ -71,6 +71,9 @@ export type DialysisInfo = {
     scaleName: string;
     // ベッド番号
     bedNumber: string;
+    machineName?: string;
+    diaTypeName?: string;
+    diaTypeDescription: string;
     // 担当者情報
     // 担当看護師
     nurseName?: string;

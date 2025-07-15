@@ -34,7 +34,7 @@ export default function DrugTabPanel({medicationRecords}: Props) {
     const [checkedMap, setCheckedMap] = useState<Partial<Record<MedicationTiming, string[]>>>({});
     const [loading, setLoading] = useState(true); // ✅ ローディング状態追加
     const {diaDate} = useDiaSession();
-    curDate = diaDate;
+    curDate = diaDate ?? new Date();
     const isFuture = dayjs(curDate).isAfter(dayjs(), "day");
 
     // ✅ 服薬記録データが変化した時、チェック済み情報を初期化
