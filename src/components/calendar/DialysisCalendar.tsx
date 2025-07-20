@@ -38,7 +38,7 @@ export default function DialysisCalendar({diaDateRange, diaRecordStatusMap}: Pro
                 renderLabel={date => {
                     const compactDate = dayjs(date).format(timeFormats.compactDate);
                     const recordStatus = diaRecordStatusMap.get(compactDate)?.status;
-                    return recordStatus ? <Tag round color={compactDate === curDate ? 'warning' : statusColorMap.get(recordStatus)}/> : <></>;
+                    return typeof recordStatus === 'number' ? <Tag round color={compactDate === curDate ? 'warning' : statusColorMap.get(recordStatus)}/> : <></>;
                 }}
             />
             <Grid columns={3} className='text-center'>

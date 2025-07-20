@@ -13,9 +13,12 @@ export const timeFormats = {
  * カレンダー用状態と対応するタグの色
  */
 export const statusColorMap: Map<DialysisStatus, string> = new Map([
-    [4, 'success'],
+    [-1, 'default'],
     [0, 'warning'],
-    [-1, 'primary'],
+    [1, '#2db7f5'],
+    [2, 'primary'],
+    [3, '#87d068'],
+    [4, 'success'],
 ]);
 /**
  * 透析状態
