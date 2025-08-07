@@ -77,7 +77,7 @@ export default function DietTabPanel({dietRecords = []}: Props) {
     const toggleFood = useCallback((meal: string, food: string) => {
         let foodSet = mealToFoods[meal];
         if (!foodSet) {
-            foodSet = new Set(food);
+            foodSet = new Set([food]);
         } else if (foodSet.has(food)) {
             foodSet.delete(food);
         } else {

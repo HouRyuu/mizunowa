@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     title: "MIZUNOWA",
     description: "そっと支えて、ずっと寄り添う",
     icons: {
-        icon: "/favicon.ico",
+        icon: "/mizunowa.ico",
     },
     manifest: "/site.webmanifest",
 };

@@ -71,7 +71,10 @@ export default function DrugTabPanel({medicationRecords}: Props) {
     );
 
     const renderedPanels = useMemo(() => {
-        return Array.from(medicationRecords || []).map(([timing, records]) => {
+        // timingMapの順で表示
+        return Array.from(timingMap.keys()).map(timing => {
+            const records = medicationRecords?.get(timing);
+            if (!records || records.length === 0) return null;
             const checkedList = checkedMap[timing] || [];
             const total = records.length;
             const checkedCount = checkedList.length;
@@ -111,7 +114,7 @@ export default function DrugTabPanel({medicationRecords}: Props) {
                     </CheckList>
                 </Collapse.Panel>
             );
-        });
+        }).filter(Boolean);
     }, [medicationRecords, checkedMap, handleCheckChange]);
 
     if (loading) {
