@@ -44,7 +44,7 @@ export default function DialysisCalendar({diaDateRange, diaRecordStatusMap}: Pro
             <Grid columns={3} className='text-center'>
                 <Grid.Item><Tag round color='success'/>透析済み</Grid.Item>
                 <Grid.Item><Tag round color='warning'/>今日の透析</Grid.Item>
-                <Grid.Item><Tag round color='primary'/>透析予約</Grid.Item>
+                <Grid.Item><Tag round color='default'/>透析予約</Grid.Item>
             </Grid>
         </section>
     );
